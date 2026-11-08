@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="hy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ԳՄՕ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafaf8;--tx:#2b2f33;--mut:#555b62;--ln:#cfd2d6;--pn:rgba(250,250,248,.9);--dna:#1f5fbf;--gene:#d9530b;--A:#d62839;--T:#1f5fbf;--G:#2e9e4f;--C:#e6b800;--ok:#23783d;--no:#b3232f;--e:cubic-bezier(.65,0,.35,1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171a;--tx:#eceef0;--mut:#aab0b7;--ln:#3a3f45;--pn:rgba(21,23,26,.9);--dna:#6aa2f0;--gene:#f08a4b;--ok:#3fae5f;--no:#e0606b}}
+:root[data-theme="dark"]{--bg:#15171a;--tx:#eceef0;--mut:#aab0b7;--ln:#3a3f45;--pn:rgba(21,23,26,.9);--dna:#6aa2f0;--gene:#f08a4b;--ok:#3fae5f;--no:#e0606b}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:400 clamp(17px,1.45vw,26px)/1.5 "Noto Sans Armenian","Mardoto",system-ui,Arial,sans-serif;overflow:hidden;touch-action:manipulation;overflow-wrap:break-word}
+button,input{touch-action:manipulation}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+h1,h2{font-weight:600;line-height:1.15;margin:0 0 .4em}
+h1{font-size:clamp(40px,6vw,96px)}h2{font-size:clamp(28px,3.4vw,60px)}
+p{margin:.3em 0}.mut{color:var(--mut)}.lg{font-size:.82em;color:var(--mut)}
+.sl{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;gap:.5em;padding:clamp(16px,4vh,48px) max(clamp(16px,5vw,80px),env(safe-area-inset-right,0px)) 84px max(clamp(16px,5vw,80px),env(safe-area-inset-left,0px));overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transition:opacity .5s var(--e),visibility 0s .5s}
+.sl>:first-child{margin-top:auto}.sl>:last-child{margin-bottom:auto}
+.sl.on{opacity:1;visibility:visible;transition:opacity .5s var(--e)}
+.sl>*{opacity:0;transform:translateY(14px);transition:opacity .6s var(--e),transform .6s var(--e)}
+.sl.on>*{opacity:1;transform:none;transition-delay:calc(var(--i)*80ms + 350ms)}
+.half>*{max-width:min(100%,clamp(320px,50vw,860px))}
+@media(max-width:800px){.sl>*{background:var(--pn)}}
+@media(prefers-reduced-motion:reduce){.sl>*{transform:none!important;transition:opacity .3s!important}}
+.b{min-height:44px;padding:.4em 1.1em;border:1.5px solid var(--tx);background:transparent;color:var(--tx);font:inherit;border-radius:8px;cursor:pointer}
+.b:hover,.b[aria-pressed=true]{background:var(--tx);color:var(--bg)}
+:focus-visible{outline:3px solid var(--dna);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:.6em;align-items:center}
+.cd{border:1px solid var(--ln);border-radius:8px;padding:.7em 1em;background:var(--pn)}
+.cd ul{margin:.3em 0;padding-left:1.1em}
+.cds{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8em;max-width:none!important}
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1em;max-width:none!important}
+.tl li{border-top:2px solid var(--tx);padding-top:.6em;position:relative}
+.tl li:before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--gene)}
+.tl b{display:block;font-size:1.3em;color:var(--gene)}
+.vw{width:100%;height:clamp(200px,44vh,500px);border:1px solid var(--ln);border-radius:8px;touch-action:pan-y;cursor:grab}
+.opt{display:block;width:100%;text-align:left;margin:.4em 0}
+.opt.ok{border-color:var(--ok);background:var(--ok);color:#fff}.opt.no{border-color:var(--no);background:var(--no);color:#fff}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:.5em;align-items:center;padding:8px max(clamp(12px,3vw,40px),env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(clamp(12px,3vw,40px),env(safe-area-inset-left,0px));background:var(--bg);border-top:1px solid var(--ln)}
+#nav .b{min-width:44px;padding:.2em .6em}
+#pr{flex:1;height:4px;background:var(--ln);border-radius:2px;overflow:hidden}#pr i{display:block;height:100%;width:0;background:var(--gene);transition:width .8s var(--e)}
+#toc{position:fixed;inset:0;z-index:9;background:var(--pn);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+#toc[hidden]{display:none}#toc ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.5em;margin:0;padding:0;width:min(100%,1100px)}
+#toc .b{width:100%;text-align:left;background:var(--bg)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1em;align-items:start;max-width:none!important}
+.g2 .vw{height:clamp(220px,38vh,420px)}
+input[type=range]{width:min(100%,360px);accent-color:var(--gene);min-height:32px;vertical-align:middle}
+a{color:var(--dna)}
+@media(max-height:520px){.sl{padding-top:12px;padding-bottom:64px}h1{font-size:34px}h2{font-size:24px}.g2 .vw{height:70vh}}
+@media(max-width:480px){.row .b{min-height:40px;padding:.3em .8em;font-size:.9em}h1{font-size:40px}h2{font-size:27px}.cds,.tl{grid-template-columns:1fr!important}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+<main id="deck"></main>
+<nav id="nav" aria-label="Նավիգացիա">
+  <button class="b" id="pv" aria-label="Նախորդ սլայդ">←</button>
+  <div id="pr" role="progressbar" aria-valuemin="1" aria-valuemax="11"><i></i></div>
+  <span id="ct" aria-live="polite">1 / 11</span>
+  <button class="b" id="nx" aria-label="Հաջորդ սլայդ">→</button>
+  <button class="b" id="tb" aria-label="Բովանդակություն (M)">☰</button>
+  <button class="b" id="fs" aria-label="Լրիվ էկրան (F)">⛶</button>
+</nav>
+<div id="toc" role="dialog" aria-modal="true" aria-label="Բովանդակություն" hidden><ol></ol></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===================== ВСЕ ТЕКСТЫ И ДАННЫЕ (редактировать здесь) ===================== */
+const DATA = {
+  ui: { start: "Սկսել", next: "Հաջորդ", again: "Անցնել նորից", reset: "Զրոյացնել", step: "Քայլ" },
+  titles: ["ԳՄՕ","Ի՞նչ է ԳՄՕ-ն","Ինչպես է ստեղծվում ԳՄՕ-ն","Գործիքներ","Պատմություն","ԳՄ բույսեր","ԳՄ մանրէներ","Օգուտներ և մտահոգություններ","Անվտանգություն և կարգավորում","Թեստ","Եզրակացություն և աղբյուրներ"],
+  s1: { sub: "Գենետիկորեն ձևափոխված օրգանիզմներ" },
+  s2: { p: "ԳՄՕ-ն օրգանիզմ է (բույս, կենդանի կամ մանրէ), որի ԴՆԹ-ն փոխված է այնպես, ինչպես բնության մեջ չի լինում՝ զուգավորմամբ կամ բնական վերահամակցմամբ։",
+    cards: [["Սելեկցիա","Բուծողն ընտրում և խաչասերում է լավագույն առանձնյակներին․ փոփոխությունները դանդաղ են և պատահական։"],["Գենային ճարտարագիտություն","Ընտրված գենն ուղղակիորեն տեղափոխում են մի օրգանիզմից մյուսը՝ նույնիսկ անհարազատ տեսակների միջև։"]],
+    lg: "Գենը ԴՆԹ-ի հատված է՝ նարնջագույնով նշված մասը։" },
+  s3: { p: "Ինչպես է գենը հայտնվում նոր օրգանիզմում։ Սեղմեք «Քայլ»։",
+    steps: ["Ընտրում են ցանկալի հատկանիշի գենը (նարնջագույն հատված)։","Հատուկ ֆերմենտները՝ «մոլեկուլային մկրատը», կտրում են գենը։","Գենը ներդնում են վեկտորի՝ օղակաձև պլազմիդի մեջ։","Վեկտորը մտցնում են բջիջ․ այնտեղ գենը սկսում է աշխատել։"],
+    lg: "Նարնջագույն՝ գեն · մոխրագույն՝ պլազմիդ (վեկտոր) · մյուս գույները՝ ԴՆԹ-ի ազոտական հիմքեր (A, T, G, C)։" },
+  s4: { p: "Սահիկով գենը ներդրեք պլազմիդի մեջ։ Մոդելը կարելի է պտտել։", ins: "Գենի ներդրում", done: "Գենը ներդրված է պլազմիդի մեջ։", lg: "Նարնջագույն աղեղ՝ գեն · մոխրագույն օղակ՝ պլազմիդ · գունավոր գնդիկներ՝ ազոտական հիմքեր · կարմիր նշաններ՝ ֆերմենտի կտրման տեղեր։", cards: [["Սահմանափակող ֆերմենտներ","Կտրում են ԴՆԹ-ն որոշակի տեղերում։ Հայտնագործվել են 1970-ական թվականներին։"],["Վեկտոր՝ պլազմիդ","Բակտերիայի օղակաձև ԴՆԹ, որը օտար գենը տանում է բջջի մեջ։"],["Agrobacterium-ի Ti-պլազմիդ","Օգտագործվում է գենը բույսի բջիջ տեղափոխելու համար (առաջին ԳՄ բույսեր՝ 1983 թ.)։"],["CRISPR/Cas9","Ժամանակակից մեթոդ՝ ԴՆԹ-ի ճշգրիտ խմբագրման համար (2012 թ.)։"]] },
+  hist: [["1973","Կոեն և Բոյեր","Առաջին հաջողված ռեկոմբինանտ ԴՆԹ փորձը՝ բակտերիայի մեջ։"],["1982","Հումուլին","Բակտերիաներով արտադրված մարդու ինսուլինը՝ առաջին հաստատված գենային ճարտարագիտական դեղը։"],["1983","Առաջին ԳՄ բույսերը","Գենը բույսին տվեցին Ti-պլազմիդի միջոցով։"],["1994","Flavr Savr լոլիկ","Առաջին ԳՄ սննդամթերքը, որ հաստատվեց վաճառքի ԱՄՆ-ում։"],["1996","Առևտրային ԳՄ կուլտուրաներ","Սկսվեց ԳՄ կուլտուրաների լայն ցանքը։"],["2012","CRISPR/Cas9","Ճշգրիտ գենային խմբագրման նոր գործիք։"]],
+  s6: { grow: "Աճ", play: "Սկսել զարգացումը", stages: ["Սերմ","Ծիլ","Ընձյուղ և տերևներ","Ծաղկաբույլ","Պտղաբերում","Հասունացում"], p: "Գենային ճարտարագիտությամբ բույսերին տալիս են օգտակար հատկանիշներ։ Ընտրեք հատկանիշը և պտտեք մոդելը։",
+    modes: ["Սովորական","Միջատակայուն (Bt)","Հերբիցիդակայուն","Վիտամիններով հարստացված"],
+    info: ["Սովորական բույս․ կան վնասատուներ և մոլախոտեր։","Bt-բույսն արտադրում է Bacillus thuringiensis բակտերիայի սպիտակուց, որը վնասում է որոշ միջատների։","Հերբիցիդակայուն բույսը դիմանում է հերբիցիդին, իսկ մոլախոտերը չորանում են։","Օրինակ՝ «Ոսկե բրինձը» պարունակում է β-կարոտին (A վիտամինի նախանյութ)․ հատիկները դառնում են նարնջագույն։"],
+    lg: "Պայմանական 3D մոդել․ կարմիր թրթուրներ՝ վնասատուներ, խոտաբույսեր՝ մոլախոտեր։" },
+  s7: { steps: ["Ինսուլինի գենը գտնվում է պլազմիդի մեջ։","Պլազմիդը մտցնում են բակտերիայի մեջ։","Գենը «կարդացվում» է՝ ստացվում է իՌՆԹ, և ռիբոսոմները կառուցում են սպիտակուցը։","Բակտերիան արտադրում է մարդու ինսուլին՝ երկու շղթայից կազմված սպիտակուց։ Այն մաքրում են և օգտագործում շաքարային դիաբետի բուժման համար։"], ins: "Ինսուլին", bac: "Բակտերիա", pls: "Պլազմիդ՝ ինսուլինի գենով", btn2: "Ցույց տալ ներսը", p: "Այսպես են ստանում մարդու ինսուլին․ ինսուլինի գենը մտցնում են բակտերիայի մեջ, և բակտերիան այն արտադրում է (1982 թ.)։ Սեղմեք «Քայլ»։", btn: "Սկսել / դադարեցնել արտադրությունը",
+    lg: "Մոխրագույն օղակ՝ պլազմիդ · նարնջագույն աղեղ՝ ինսուլինի գեն · նարնջագույն թել՝ իՌՆԹ · կապույտ և վարդագույն շղթա՝ ինսուլինի մոլեկուլ · մանուշակագույն թել՝ բակտերիայի ԴՆԹ։ Պայմանական մոդել։" },
+  s8: { ben: ["Դեղեր (օրինակ՝ ինսուլին)","Կայունություն որոշ վնասատուների նկատմամբ և, որոշ դեպքերում, քիչ թունաքիմիկատ","Սննդային արժեքի բարձրացում"],
+    con: ["Ալերգիկ ռեակցիաների հավանականություն (ստուգվում է)","Գեների տարածում դեպի վայրի ազգակից բույսեր","Կենսաբազմազանության և մոլախոտերի կայունության խնդիրներ","Պիտակավորում, արտոնագրեր, հասարակական վստահություն"],
+    bh: "Օգուտներ", ch: "Մտահոգություններ", lg: "Գիտնականները և պետությունները քննարկում են այս հարցերը․ յուրաքանչյուր դեպք դիտարկվում է առանձին։" },
+  s9: { p: "ԱՀԿ-ի տվյալներով՝ միջազգային շուկայում առկա ԳՄ սննդամթերքն անցել է անվտանգության գնահատում, և մարդու առողջության համար ռիսկ չի ենթադրվում։ Սակայն յուրաքանչյուր ԳՄ սննդամթերք գնահատվում է առանձին․ բոլորի համար ընդհանուր եզրակացություն անել հնարավոր չէ։",
+    list: "Գնահատվում են՝ թունավորությունը, ալերգենությունը, սննդային բաղադրությունը, ներդրված գենի կայունությունը, չնախատեսված ազդեցությունները։",
+    am: "Հայաստանում ԳՄՕ-ների օգտագործումը կարգավորվում է «Գենետիկորեն ձևափոխված օրգանիզմների մասին» օրենքով․ երկրում վարվում է զգուշավոր քաղաքականություն։" },
+  quiz: [
+    { q: "Ի՞նչ է ԳՄՕ-ն։", a: "Օրգանիզմ, որի ԴՆԹ-ն փոխված է գենային ճարտարագիտությամբ", w: ["Օրգանիզմ, որն աճել է պարարտանյութով","Օրգանիզմ, որ ստացվել է միայն խաչասերմամբ"], e: "ԳՄՕ-ի ԴՆԹ-ն փոխված է այնպես, ինչպես բնության մեջ զուգավորմամբ չի լինում։" },
+    { q: "Ի՞նչ դեր ունի պլազմիդը գենային ճարտարագիտության մեջ։", a: "Վեկտոր է՝ գենը տանում է բջջի մեջ", w: ["Կտրում է ԴՆԹ-ն","Կառուցում է սպիտակուց ռիբոսոմում"], e: "Պլազմիդը օղակաձև ԴՆԹ է, որը օգտագործում են որպես վեկտոր։" },
+    { q: "Որն է առաջին հաստատված գենային ճարտարագիտական դեղը։", a: "Մարդու ինսուլինը (1982 թ.)", w: ["Պենիցիլինը","Վիտամին C"], e: "Բակտերիաներով արտադրված Հումուլինը 1982 թ. հաստատվեց ԱՄՆ-ում։" },
+    { q: "Ի՞նչ են անում սահմանափակող ֆերմենտները։", a: "Կտրում են ԴՆԹ-ն որոշակի տեղերում", w: ["Պահում են ջուրը բջջում","Ստեղծում են ատոմներ"], e: "Դրանք «մոլեկուլային մկրատ» են՝ կտրում են ԴՆԹ-ն որոշակի հաջորդականությունների մոտ։" },
+    { q: "Ո՞ր ԳՄ սննդամթերքն է 1994 թ. հաստատվել առաջինը։", a: "Flavr Savr լոլիկը", w: ["Ոսկե բրինձը","Bt եգիպտացորենը"], e: "Flavr Savr լոլիկը ԱՄՆ-ում հաստատվեց վաճառքի 1994 թվականին։" },
+    { q: "Ի՞նչ են ստուգում ԳՄ սննդամթերքի անվտանգության գնահատման ժամանակ։", a: "Թունավորությունը և ալերգենությունը", w: ["Միայն գույնը","Միայն գինը"], e: "Գնահատվում են նաև սննդային բաղադրությունը և չնախատեսված ազդեցությունները։" }
+  ],
+  qui: { of: "Հարց", score: "Արդյունք՝", correct: "Ճիշտ է։ ", wrong: "Սխալ է։ " },
+  s11: { h: "Եզրակացություն", items: ["ԳՄՕ-ն ստեղծվում է ընտրված գենի տեղափոխմամբ։","Գործիքներ՝ ֆերմենտներ, պլազմիդներ, CRISPR։","Կան օգուտներ (դեղեր, վնասատուակայունություն) և մտահոգություններ (ալերգենություն, գեների տարածում), ուստի յուրաքանչյուր ԳՄՕ գնահատվում է առանձին։"], srcH: "Աղբյուրներ",
+    src: [["ԱՀԿ (WHO) — Genetically modified food, Q&A","https://www.who.int/news-room/q-a-detail/food-genetically-modified"],["ԱՀԿ (WHO) — GM foods FAQ","https://www.who.int/news-room/q-a-detail/FAQ-genetically-modified-foods"],["Science News — 8 GMOs, a brief history","https://www.sciencenews.org/article/8-gmo-history-genetic-modification"],["Biotechnology timeline (ABPI)","https://www.abpischools.org.uk/topics/biotechnology/biotechnology-timeline/"],["FAOLEX — Armenia, Law HO-11-N on GMOs","https://leap.unep.org/en/countries/am/national-legislation/law-no-ho-11-n-genetically-modified-organisms"]] }
+};
+
+(() => {
+"use strict";
+const D = DATA, $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches, N_SL = 11;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ===================== РАЗМЕТКА СЛАЙДОВ ===================== */
+const cards = a => `<div class="cds">${a.map(c => `<div class="cd"><strong>${c[0]}</strong><p class="mut">${c[1]}</p></div>`).join("")}</div>`;
+const SL = [
+ ["half", () => `<h1>${D.titles[0]}</h1><p>${D.s1.sub}</p><div><button class="b" data-go="2">${D.ui.start}</button></div>`],
+ ["half", () => `<h2>${D.titles[1]}</h2><p>${D.s2.p}</p>${cards(D.s2.cards)}<p class="lg">${D.s2.lg}</p>`],
+ ["half", () => `<h2>${D.titles[2]}</h2><p>${D.s3.p}</p><div class="row"><button class="b" id="gs">${D.ui.step}</button><button class="b" id="gr">${D.ui.reset}</button></div><p id="gc" class="cd" aria-live="polite" hidden></p><p class="lg">${D.s3.lg}</p>`],
+ ["full", () => `<h2>${D.titles[3]}</h2><div class="g2"><div><p>${D.s4.p}</p><div id="v3" class="vw" role="img" aria-label="3D"></div><label for="ins">${D.s4.ins}</label> <input id="ins" type="range" min="0" max="100" value="0"><p id="is" aria-live="polite" class="lg"></p><p class="lg">${D.s4.lg}</p></div><div class="cds" style="grid-template-columns:1fr">${D.s4.cards.map(c => `<div class="cd"><strong>${c[0]}</strong><p class="mut">${c[1]}</p></div>`).join("")}</div></div>`],
+ ["full", () => `<h2>${D.titles[4]}</h2><ol class="tl">${D.hist.map(h => `<li><b>${h[0]}</b><strong>${h[1]}</strong><p>${h[2]}</p></li>`).join("")}</ol>`],
+ ["full", () => `<h2>${D.titles[5]}</h2><p>${D.s6.p}</p><div id="v1" class="vw" role="img" aria-label="3D"></div><div class="row" role="group">${D.s6.modes.map((m, i) => `<button class="b" data-m="${i}" aria-pressed="false">${m}</button>`).join("")}</div><div class="row"><button class="b" id="pp">${D.s6.play}</button><label for="pg6" class="lg">${D.s6.grow}</label><input id="pg6" type="range" min="0" max="100" value="100"><strong id="pgl" aria-live="polite"></strong></div><p id="pi" aria-live="polite"></p><p class="lg">${D.s6.lg}</p>`],
+ ["full", () => `<h2>${D.titles[6]}</h2><p>${D.s7.p}</p><div id="v2" class="vw" role="img" aria-label="3D"></div><div class="row"><button class="b" id="bp">${D.ui.step}</button><button class="b" id="br">${D.ui.reset}</button><button class="b" id="bo" aria-pressed="false">${D.s7.btn2}</button></div><p id="bc" class="cd" aria-live="polite"></p><p class="lg">${D.s7.lg}</p>`],
+ ["full", () => `<h2>${D.titles[7]}</h2><div class="cds"><div class="cd"><strong>${D.s8.bh}</strong><ul>${D.s8.ben.map(x => `<li>${x}</li>`).join("")}</ul></div><div class="cd"><strong>${D.s8.ch}</strong><ul>${D.s8.con.map(x => `<li>${x}</li>`).join("")}</ul></div></div><p class="lg">${D.s8.lg}</p>`],
+ ["half", () => `<h2>${D.titles[8]}</h2><p>${D.s9.p}</p><p class="cd">${D.s9.list}</p><p class="lg">${D.s9.am}</p>`],
+ ["half", () => `<h2>${D.titles[9]}</h2><div id="qz"></div>`],
+ ["half", () => `<h2>${D.s11.h}</h2><ul>${D.s11.items.map(i => `<li>${i}</li>`).join("")}</ul><h3 style="margin:.4em 0 0">${D.s11.srcH}</h3><ul class="lg">${D.s11.src.map(s => `<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join("")}</ul>`]
+];
+const deck = $("#deck");
+SL.forEach((s, i) => {
+  const el = document.createElement("section");
+  el.className = "sl " + s[0]; el.id = "slide-" + (i + 1);
+  el.setAttribute("aria-label", `${i + 1}. ${D.titles[i]}`); el.setAttribute("aria-hidden", "true"); el.inert = true;
+  el.innerHTML = s[1](); [...el.children].forEach((c, k) => c.style.setProperty("--i", k));
+  deck.appendChild(el);
+});
+const slides = $$(".sl");
+
+/* ===================== 3D: ОДИН ОБЪЕКТ НА ВЕСЬ САЙТ (спираль ДНК → кольцо-плазмида) ===================== */
+const V3 = THREE.Vector3;
+const R = new THREE.WebGLRenderer({ canvas: $("#c"), antialias: true, alpha: true });
+R.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 800 ? 1.5 : 2));
+const sc = new THREE.Scene(), cam = new THREE.PerspectiveCamera(40, 1, .1, 100); cam.position.z = 24;
+const lights = s => { s.add(new THREE.HemisphereLight(0xffffff, 0x9aa0a8, .95)); const l = new THREE.DirectionalLight(0xffffff, .75); l.position.set(4, 6, 9); s.add(l); };
+lights(sc); R.domElement.addEventListener("webglcontextlost", e => e.preventDefault());
+const BC = {}; ["A","T","G","C"].forEach(b => BC[b] = new THREE.Color(css("--" + b)));
+const cDna = new THREE.Color(css("--dna")), cGene = new THREE.Color(css("--gene")), cGray = new THREE.Color("#8d99a6");
+const COMP = { A: "T", T: "A", G: "C", C: "G" }, SEQ = "ATGCGTACCTAGGCATTGCAAGCTTCGAATCGGCTAATGCCGTA", N = SEQ.length, H = 13, G0 = 14, G1 = 27;
+const g = new THREE.Group(); sc.add(g);
+const sg = new THREE.SphereGeometry(1, 12, 10), mk = () => new THREE.Mesh(sg, new THREE.MeshLambertMaterial({ color: 0xffffff }));
+const bbA = [], bbB = [], bsA = [], bsB = [], pa = [], pb = [], bbc = [];
+for (let i = 0; i < N; i++) { [bbA, bbB, bsA, bsB].forEach(a => { const m = mk(); g.add(m); a.push(m); }); pa.push(new V3()); pb.push(new V3()); bbc.push(new THREE.Color()); }
+const pos = new Float32Array(4 * N * 6), col = new Float32Array(4 * N * 6), lg = new THREE.BufferGeometry();
+lg.setAttribute("position", new THREE.BufferAttribute(pos, 3)); lg.setAttribute("color", new THREE.BufferAttribute(col, 3));
+const lines = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ vertexColors: true })); lines.frustumCulled = false; g.add(lines);
+const cl = (x, a, b) => Math.min(b, Math.max(a, x)), sm = x => x * x * (3 - 2 * x);
+const hA = new V3(), hB = new V3(), rA = new V3(), rB = new V3(), mid = new V3(), Ld = new V3(), t1 = new V3(), t2 = new V3();
+const cA = new THREE.Color(), cB = new THREE.Color();
+let halfH = Math.tan(20 * Math.PI / 180) * 24, halfW = halfH;
+
+function upd(p, t) {
+  g.position.set(p.fx * halfW, p.fy * halfH, 0); g.scale.setScalar(p.s * (cam.aspect < 1 ? .7 : 1)); g.rotation.set(.6 * p.m, 0, 0);
+  const th0 = t * p.spd * 2; let q = 0;
+  const seg = (a, b, c1, c2) => { pos[q] = a.x; pos[q+1] = a.y; pos[q+2] = a.z; col[q] = c1.r; col[q+1] = c1.g; col[q+2] = c1.b; q += 3; pos[q] = b.x; pos[q+1] = b.y; pos[q+2] = b.z; col[q] = c2.r; col[q+1] = c2.g; col[q+2] = c2.b; q += 3; };
+  for (let i = 0; i < N; i++) {
+    const isG = i >= G0 && i <= G1, y = (i / (N - 1) - .5) * H, th = i * .62 + th0, ph = i / N * 6.2832, cp = Math.cos(ph), sp = Math.sin(ph), ct = Math.cos(th), st = Math.sin(th);
+    hA.set(2 * ct, y, 2 * st); hB.set(-2 * ct, y, -2 * st);                                                  // спираль
+    rA.set(5 * cp + 1.2 * ct * cp, 5 * sp + 1.2 * ct * sp, 1.2 * st); rB.set(5 * cp - 1.2 * ct * cp, 5 * sp - 1.2 * ct * sp, -1.2 * st);   // кольцо
+    pa[i].copy(hA).lerp(rA, p.m); pb[i].copy(hB).lerp(rB, p.m);
+    if (isG) { Ld.set(6.5 * p.lift, 1.5 * p.lift, 0); pa[i].add(Ld); pb[i].add(Ld); }                       // «вырезание» гена
+    mid.copy(pa[i]).add(pb[i]).multiplyScalar(.5);
+    const b = SEQ[i], gw = isG ? p.hl : 0, tint = isG ? 0 : p.vec * .7;
+    cA.copy(BC[b]).lerp(cGene, gw).lerp(cGray, tint); cB.copy(BC[COMP[b]]).lerp(cGene, gw).lerp(cGray, tint);
+    bbc[i].copy(cDna).lerp(cGene, gw).lerp(cGray, tint);
+    bbA[i].position.copy(pa[i]); bbB[i].position.copy(pb[i]); bbA[i].scale.setScalar(.38); bbB[i].scale.setScalar(.38);
+    bbA[i].material.color.copy(bbc[i]); bbB[i].material.color.copy(bbc[i]);
+    bsA[i].position.copy(pa[i]).lerp(mid, .35); bsB[i].position.copy(pb[i]).lerp(mid, .35); bsA[i].scale.setScalar(.3); bsB[i].scale.setScalar(.3);
+    bsA[i].material.color.copy(cA); bsB[i].material.color.copy(cB);
+    seg(pa[i], mid, cA, cA); seg(pb[i], mid, cB, cB);
+  }
+  for (let i = 0; i < N - 1; i++) {
+    const f = (i === G0 - 1 || i === G1) ? 1 - p.lift : 1;                                                    // на границах гена цепь рвётся
+    [pa, pb].forEach(a => {
+      if (i === G1) seg(a[i + 1], t1.copy(a[i + 1]).lerp(a[i], f), bbc[i + 1], bbc[i + 1]);
+      else seg(a[i], t1.copy(a[i]).lerp(a[i + 1], f), bbc[i], bbc[i]);
+    });
+  }
+  const f2 = sm(cl((p.m - .7) / .3, 0, 1));                                                                   // замыкание кольца
+  seg(pa[N - 1], t1.copy(pa[N - 1]).lerp(pa[0], f2), bbc[N - 1], bbc[N - 1]); seg(pb[N - 1], t2.copy(pb[N - 1]).lerp(pb[0], f2), bbc[N - 1], bbc[N - 1]);
+  lg.attributes.position.needsUpdate = true; lg.attributes.color.needsUpdate = true;
+}
+/* Позы объекта по слайдам: [x, y, масштаб, m (спираль→кольцо), hl (подсветка гена), lift (вырезание), vec (серый вектор), скорость] */
+const q = (fx, fy, s, m = 0, hl = 0, lift = 0, vec = 0, spd = .25) => ({ fx, fy, s, m, hl, lift, vec, spd });
+const P = [q(.5,0,1.2,0,0,0,0,.35), q(.6,0,1,0,1), q(.55,0,1.05), q(.8,0,.85,1,1,0,1), q(.88,.62,.3,1,1,0,1), q(.9,-.6,.35,1,1,0,1), q(.9,-.6,.35,1,1,0,1), q(.88,-.6,.33,1,1,0,1), q(.88,-.62,.33,1,1,0,1), q(.88,-.62,.3,1,1,0,1), q(.88,-.62,.3,1,1,0,1)];
+const keys = ["fx","fy","s","m","hl","lift","vec","spd"];
+let cur = { ...P[0] }, from = { ...cur }, to = { ...cur }, t0 = -1e9, dur = 1;
+// плавность cubic-bezier(.65,0,.35,1): решаем x(u)=t бисекцией
+const ease = t => { let lo = 0, hi = 1, u = t; for (let k = 0; k < 24; k++) { u = (lo + hi) / 2; const x = 3 * (1 - u) ** 2 * u * .65 + 3 * (1 - u) * u * u * .35 + u ** 3; if (x < t) lo = u; else hi = u; } return 3 * (1 - u) * u * u + u ** 3; };
+const aim = (target, d) => { from = { ...cur }; to = target; t0 = performance.now(); dur = d; };
+
+/* ===================== ВЬЮЕРЫ 3D-МОДЕЛЕЙ (растение, бактерия) ===================== */
+function mkViewer(el, setup, z) {
+  const r = new THREE.WebGLRenderer({ antialias: true, alpha: true }), s = new THREE.Scene(), c = new THREE.PerspectiveCamera(40, 1, .1, 100), root = new THREE.Group();
+  r.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 800 ? 1.5 : 2)); el.appendChild(r.domElement); c.position.set(0, 0, z); lights(s); s.add(root);
+  const st = setup(root) || {}; let ry = 0, rx = -.2, drag = false, lx = 0, ly = 0; const cv = r.domElement;
+  cv.addEventListener("pointerdown", e => { drag = true; lx = e.clientX; ly = e.clientY; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener("pointermove", e => { if (!drag) return; ry += (e.clientX - lx) * .01; rx = cl(rx + (e.clientY - ly) * .01, -1.2, 1.2); lx = e.clientX; ly = e.clientY; });
+  ["pointerup", "pointercancel"].forEach(ev => cv.addEventListener(ev, () => drag = false));
+  return { st, size() { const w = el.clientWidth, h = el.clientHeight; if (w && h) { r.setSize(w, h); c.aspect = w / h; c.updateProjectionMatrix(); } },
+    draw(t) { if (!drag) ry += .004; root.rotation.set(rx, ry, 0); if (st.tick) st.tick(t); r.render(s, c); } };
+}
+const lam = c => new THREE.MeshLambertMaterial({ color: c });
+const std = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: .65, metalness: 0 }, o));
+const rnd = (() => { let z = 7; return () => (z = z * 16807 % 2147483647) / 2147483647; })();
+const c01 = x => Math.min(1, Math.max(0, x)), eo = x => 1 - (1 - x) * (1 - x);
+// Подписи в 3D (спрайты). Перерисовываются, когда загрузится шрифт
+const labels = [];
+function mkLabel(text) {
+  const cv = document.createElement("canvas"), ctx = cv.getContext("2d"), tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter; tex.generateMipmaps = false;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false })); sp.renderOrder = 10;
+  const draw = () => { const f = '600 34px "Noto Sans Armenian",system-ui,Arial,sans-serif'; ctx.font = f; const w = Math.ceil(ctx.measureText(text).width) + 36, h = 56; cv.width = w; cv.height = h; ctx.font = f;
+    ctx.fillStyle = "rgba(255,255,255,.93)"; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "#1f2328"; ctx.textBaseline = "middle"; ctx.fillText(text, 18, h / 2 + 2); tex.needsUpdate = true; sp.scale.set(w / h * .42, .42, 1); };
+  draw(); labels.push(draw); return sp;
+}
+if (document.fonts) document.fonts.ready.then(() => labels.forEach(f => f()));
+// Растение (кукуруза): развитие — семя → росток → листья → метёлка → початок → созревание
+const PL = mkViewer($("#v1"), root => {
+  root.position.y = -.4;
+  const soil = new THREE.Mesh(new THREE.CylinderGeometry(2.7, 3, .7, 48), std(0x6b4a2f)); soil.position.y = -2.45; root.add(soil);
+  const turf = new THREE.Mesh(new THREE.CylinderGeometry(2.7, 2.7, .06, 48), std(0x4f7d35)); turf.position.y = -2.08; root.add(turf);
+  const pg = new THREE.Group(); pg.position.y = -2.1; root.add(pg);
+  const seed = new THREE.Mesh(sg, std(0x8b5a2b)); seed.position.y = -.05; pg.add(seed);
+  const stem = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(0,0,0), new V3(.05,1.4,0), new V3(-.04,2.9,0), new V3(0,4.3,0)]), 24, .12, 8), std(0x55a24a)); pg.add(stem);
+  const lgeo = new THREE.PlaneGeometry(2.1, .62, 14, 1); lgeo.rotateX(-Math.PI / 2); lgeo.translate(1.05, 0, 0);
+  const lp = lgeo.attributes.position; for (let i = 0; i < lp.count; i++) { const x = lp.getX(i), f = x / 2.1; lp.setY(i, .45 * x - .32 * x * x); lp.setZ(i, lp.getZ(i) * (1 - .75 * f * f)); } lgeo.computeVertexNormals();
+  const lmat = std(0x4fae4a, { side: THREE.DoubleSide }), bugs = [], lfs = [];
+  for (let k = 0; k < 8; k++) {
+    const lf = new THREE.Group(); lf.rotation.y = k * 2.4; lf.userData.h0 = .5 + k * .42; lf.add(new THREE.Mesh(lgeo, lmat)); pg.add(lf); lfs.push(lf);
+    if (k % 2 === 1 && k < 7) {   // гусеница на листе
+      const bug = new THREE.Group(); bug.position.set(1.1, .2, 0);
+      for (let i = 0; i < 5; i++) { const sp = new THREE.Mesh(sg, std(0xc2412d)); sp.scale.setScalar(.095 - i * .009); sp.position.set(i * .14 - .28, Math.sin(i * 1.2) * .03 + .06, 0); bug.add(sp); }
+      const eye = new THREE.Mesh(sg, std(0x111111)); eye.scale.setScalar(.03); eye.position.set(-.33, .12, .05); bug.add(eye); lf.add(bug); bugs.push(bug);
+    }
+  }
+  const tg = new THREE.Group(); pg.add(tg);
+  for (let i = 0; i < 9; i++) { const gt = new THREE.CylinderGeometry(.015, .015, .8, 4); gt.translate(0, .4, 0); const t = new THREE.Mesh(gt, std(0xd9c07a)); t.rotation.set(0, i * .7, .35 + .5 * rnd()); tg.add(t); }
+  const cob = new THREE.Group(), ci = new THREE.Group(); ci.position.x = .22; ci.rotation.z = -.4; cob.add(ci); pg.add(cob);
+  const kmat = std(0xbcd77a, { roughness: .4 }), ker = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 8, 6), kmat, 10 * 12), mt = new THREE.Matrix4(), q4 = new THREE.Quaternion(); let n = 0;
+  for (let r = 0; r < 10; r++) { const y = -.45 + r * .14, rad = .21 * Math.sqrt(Math.max(.05, 1 - ((y - .1) / .8) ** 2)); for (let j = 0; j < 12; j++) { const a = j / 12 * 6.2832 + (r % 2) * .26; mt.compose(new V3(Math.cos(a) * rad, y, Math.sin(a) * rad), q4, new V3(.085, .085, .085)); ker.setMatrixAt(n++, mt); } }
+  ci.add(ker);
+  const husk = new THREE.Mesh(new THREE.CylinderGeometry(.27, .19, .95, 16, 1, true), std(0x5fae52, { side: THREE.DoubleSide })); husk.position.y = -.4; ci.add(husk);
+  for (let i = 0; i < 3; i++) { const tip = new THREE.Mesh(new THREE.ConeGeometry(.13, .75, 6), std(0x6bbd5b)); tip.position.set(Math.cos(i * 2.1) * .22, -.02, Math.sin(i * 2.1) * .22); tip.rotation.set(Math.sin(i * 2.1) * .35, 0, -Math.cos(i * 2.1) * .35); ci.add(tip); }
+  const wm = std(0x7cc243), weeds = new THREE.Group(); root.add(weeds);
+  for (let k = 0; k < 7; k++) { const tf = new THREE.Group(), a = k * .9 + .3, r = 1.3 + (k % 3) * .4; tf.position.set(Math.cos(a) * r, -2.05, Math.sin(a) * r);
+    for (let i = 0; i < 6; i++) { const bg = new THREE.ConeGeometry(.05, .85, 5); bg.translate(0, .42, 0); const bl = new THREE.Mesh(bg, wm); bl.rotation.set((rnd() - .5) * .8, 0, (rnd() - .5) * .8); tf.add(bl); } weeds.add(tf); }
+  const dm = std(0x7fb2e5, { transparent: true, opacity: .75 }), drops = [];
+  for (let k = 0; k < 30; k++) { const d = new THREE.Mesh(sg, dm); d.scale.setScalar(.035); d.position.set((rnd() - .5) * 4.4, rnd() * 5 - 2, (rnd() - .5) * 4.4); d.visible = false; root.add(d); drops.push(d); }
+  let bT = 1, wT = 1, spray = false, gv = 1, ripe = true, kT = new THREE.Color(0xf0d04a), wc = new THREE.Color(0x7cc243); const unripe = new THREE.Color(0xbcd77a);
+  // стадии развития v: 0..1
+  function apply(v) {
+    const sd = c01(1 - (v - .04) / .06); seed.scale.set(.18 * sd + .001, .12 * sd + .001, .12 * sd + .001);
+    const h = eo(c01((v - .06) / .5)); stem.visible = h > .004; stem.scale.set(.5 + .5 * h, Math.max(h, .001), .5 + .5 * h);
+    lfs.forEach((lf, k) => { const g = eo(c01((v - (.14 + k * .045)) / .14)); lf.position.y = lf.userData.h0 * h; lf.scale.setScalar(Math.max(g * (1 - k * .06), .001)); });
+    tg.position.y = 4.3 * h; tg.scale.setScalar(Math.max(eo(c01((v - .62) / .12)), .001));
+    cob.position.y = 2 * h; cob.scale.setScalar(Math.max(eo(c01((v - .72) / .2)), .001));
+    gv = c01((v - .08) / .1); ripe = v > .9;
+  }
+  apply(1);
+  return {
+    mode(i) { bT = i === 1 ? 0 : 1; wT = i === 2 ? 0 : 1; spray = i === 2; kT = new THREE.Color(i === 3 ? 0xe8800c : 0xf0d04a); wc = new THREE.Color(i === 2 ? 0x8a7a4a : 0x7cc243); },
+    grow: apply,
+    tick(t) {
+      bugs.forEach((b, k) => { const s = b.scale.x + (bT - b.scale.x) * .1; b.scale.setScalar(Math.max(s, .001)); b.rotation.z = Math.sin(t * 3 + k) * .08; });
+      weeds.scale.y += ((wT ? 1 : .12) * gv - weeds.scale.y) * .08; weeds.scale.x = weeds.scale.z = Math.max(.001, gv); wm.color.lerp(wc, .08); kmat.color.lerp(ripe ? kT : unripe, .08);
+      drops.forEach(d => { d.visible = spray; d.position.y -= .045; if (d.position.y < -2) d.position.y = 3.5; });
+      pg.rotation.z = Math.sin(t * .8) * .012;
+    }
+  };
+}, 10);
+function pickMode(i) { PL.st.mode(i); $$("[data-m]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.m === i)); $("#pi").textContent = D.s6.info[i]; }
+$$("[data-m]").forEach(b => b.addEventListener("click", () => pickMode(+b.dataset.m))); pickMode(0);
+let playing = false, pv = 1;
+const setG = v => { pv = v; PL.st.grow(v); $("#pg6").value = Math.round(v * 100); const st = D.s6.stages; $("#pgl").textContent = st[v < .08 ? 0 : v < .25 ? 1 : v < .6 ? 2 : v < .78 ? 3 : v < .95 ? 4 : 5]; };
+$("#pg6").addEventListener("input", e => { playing = false; setG(e.target.value / 100); });
+$("#pp").addEventListener("click", () => { setG(0); playing = true; });
+setG(1);
+// Молекула инсулина: короткая цепь A (синяя) и длинная цепь B (розовая), связанные жёлтыми мостиками
+function insulinMol() {
+  const g = new THREE.Group(), ma = std(0x3a7bd5), mb = std(0xe0537a), my = std(0xf2c230);
+  const chain = (n, mat, r, off) => { const pts = []; for (let i = 0; i < n; i++) { const a = i * .9, p = new V3(Math.cos(a) * r, i * .14 - n * .07, Math.sin(a) * r + off), m = new THREE.Mesh(sg, mat); m.scale.setScalar(.09); m.position.copy(p); g.add(m); pts.push(p); } return pts; };
+  const A = chain(14, ma, .16, -.12), B = chain(20, mb, .2, .18);
+  [[3, 6], [9, 13]].forEach(([i, j]) => { const a = A[i], c = B[j], v = c.clone().sub(a), m = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 6), my); m.position.copy(a).add(c).multiplyScalar(.5); m.scale.set(.035, v.length(), .035); m.quaternion.setFromUnitVectors(new V3(0, 1, 0), v.normalize()); g.add(m); });
+  return g;
+}
+// Бактерия: шаги — плазмида с геном инсулина → вход в клетку → чтение гена (иРНК) → производство инсулина
+const BA = mkViewer($("#v2"), root => {
+  const prof = [], r = 1.15, L = 2.6;
+  for (let a = -90; a <= 0; a += 10) { const t = a * Math.PI / 180; prof.push(new THREE.Vector2(r * Math.cos(t), -L / 2 + r * Math.sin(t))); }
+  for (let a = 0; a <= 90; a += 10) { const t = a * Math.PI / 180; prof.push(new THREE.Vector2(r * Math.cos(t), L / 2 + r * Math.sin(t))); }
+  const shell = (k, c, o) => { const m = new THREE.Mesh(new THREE.LatheGeometry(prof.map(p => new THREE.Vector2(p.x * k, p.y * k)), 48), std(c, { transparent: true, opacity: o, side: THREE.DoubleSide, depthWrite: false, roughness: .3 })); m.rotation.z = Math.PI / 2; root.add(m); return m; };
+  const outer = shell(1, 0x6fb7a8, .3), inner = shell(.9, 0xc9ecd9, .18);
+  const pts = []; for (let i = 0; i < 40; i++) pts.push(new V3((rnd() - .5) * 2.6, (rnd() - .5) * 1, (rnd() - .5) * 1));
+  root.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 200, .035, 6, true), std(0x7b5ea7)));
+  const rm = std(0xe0b080), hotM = std(0xe0b080, { emissive: 0x000000 }), RIB = new V3(-.9, -.3, .25);
+  for (let i = 0; i < 50; i++) { const m = new THREE.Mesh(sg, rm); m.scale.setScalar(.045); m.position.set((rnd() - .5) * 3.4, (rnd() - .5) * 1.5, (rnd() - .5) * 1.5); if (m.position.y ** 2 + m.position.z ** 2 < 1.1 && Math.abs(m.position.x) < 1.7) root.add(m); }
+  for (let i = 0; i < 6; i++) { const m = new THREE.Mesh(sg, hotM); m.scale.setScalar(.085); m.position.set(RIB.x + (rnd() - .5) * .6, RIB.y + (rnd() - .5) * .5, RIB.z + (rnd() - .5) * .4); root.add(m); }
+  const fl = new THREE.Group(), fp = []; for (let i = 0; i < 24; i++) fp.push(new V3(-2.4 - i * .12, Math.sin(i * .6) * .16, Math.cos(i * .6) * .16));
+  fl.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(fp), 60, .035, 6), std(0x9a9a9a))); root.add(fl);
+  const IN = new V3(.55, -.1, .25), OUT = new V3(1.3, 2.1, .3), pl = new THREE.Group(); pl.position.copy(OUT); pl.scale.setScalar(.75); root.add(pl);
+  const gcol = new THREE.Color(css("--gene")).getHex();
+  pl.add(new THREE.Mesh(new THREE.TorusGeometry(.8, .09, 8, 48, 6.2832 * .78), std(0x8d99a6)));
+  const ge = new THREE.Mesh(new THREE.TorusGeometry(.8, .13, 8, 16, 6.2832 * .22), std(gcol)); ge.rotation.z = 6.2832 * .78; pl.add(ge);
+  const mrnaMat = std(gcol, { transparent: true, opacity: 0 });
+  root.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([IN.clone(), new V3(.2, .3, .5), new V3(-.4, .1, .4), RIB.clone()]), 40, .03, 6), mrnaMat));
+  const lbB = mkLabel(D.s7.bac), lbP = mkLabel(D.s7.pls), lbI = mkLabel(D.s7.ins); lbB.position.set(-1, -1.75, 0); root.add(lbB, lbP, lbI);
+  const base = insulinMol(), mols = [];
+  for (let k = 0; k < 8; k++) { const m = base.clone(); m.userData.d = new V3(Math.cos(k * 2.4) * .9, Math.sin(k * 1.7) * .7, Math.sin(k * 2.4) * .9).normalize(); m.visible = false; root.add(m); mols.push(m); }
+  const S = { n: 0, open: false, stage(n) { S.n = n; },
+    tick(t) {
+      const n = S.n; pl.position.lerp(n >= 1 ? IN : OUT, .06); pl.rotation.y = t * .6; fl.rotation.x = t * 3;
+      lbP.position.copy(pl.position).add(new V3(0, 1.0, 0)); lbI.position.set(2.9, 1.2, 0); lbI.visible = n >= 3;
+      mrnaMat.opacity += ((n >= 2 ? .95 : 0) - mrnaMat.opacity) * .08; hotM.emissive.setHex(n >= 2 ? 0x663300 : 0);
+      outer.material.opacity += ((S.open ? .07 : .3) - outer.material.opacity) * .1; inner.material.opacity += ((S.open ? .04 : .18) - inner.material.opacity) * .1;
+      mols.forEach((m, k) => { const ph = (t * .3 + k / mols.length) % 1; m.visible = n >= 3; m.position.copy(RIB).addScaledVector(m.userData.d, .3 + ph * 3.4); m.scale.setScalar(.6 * Math.sin(Math.PI * ph) + .001); m.rotation.set(t, t * .7, 0); });
+    } };
+  return S;
+}, 10);
+let bs = 0;
+const bShow = () => { BA.st.stage(bs); $("#bc").textContent = `${bs + 1}/4. ${D.s7.steps[bs]}`; $("#bp").textContent = bs === 3 ? D.ui.again : D.ui.next; };
+function bReset() { bs = 0; bShow(); $("#bp").textContent = D.ui.step; }
+$("#bp").onclick = () => { bs = (bs + 1) % 4; bShow(); };
+$("#br").onclick = bReset;
+$("#bo").addEventListener("click", e => { BA.st.open = !BA.st.open; e.currentTarget.setAttribute("aria-pressed", BA.st.open); });
+bReset();
+// Плазмида: перетащите ползунок — ген встаёт в разрыв кольца
+const PS = mkViewer($("#v3"), root => {
+  const Rr = 1.6, ARC = 6.2832 * .78, GA = 6.2832 * .22, mid = ARC + GA / 2;
+  root.add(new THREE.Mesh(new THREE.TorusGeometry(Rr, .1, 12, 64, ARC), std(0x8d99a6)));
+  const gw = new THREE.Group(), gene = new THREE.Group(), gm = std(new THREE.Color(css("--gene")).getHex());
+  gene.add(new THREE.Mesh(new THREE.TorusGeometry(Rr, .14, 12, 24, GA), gm)); gene.rotation.z = ARC; gw.add(gene); root.add(gw);
+  const bc = ["--A", "--T", "--G", "--C"].map(v => new THREE.Color(css(v)).getHex());
+  for (let i = 0; i < 36; i++) { const a = i / 36 * 6.2832, m = new THREE.Mesh(sg, std(bc[i % 4])); m.scale.setScalar(.09);
+    if (a < ARC) { m.position.set(1.38 * Math.cos(a), 1.38 * Math.sin(a), 0); root.add(m); } else { m.position.set(1.38 * Math.cos(a - ARC), 1.38 * Math.sin(a - ARC), 0); gene.add(m); } }
+  const cuts = [ARC, 6.2832].map(a => { const c = new THREE.Mesh(new THREE.ConeGeometry(.13, .4, 8), std(0xd62839)); c.position.set((Rr + .35) * Math.cos(a), (Rr + .35) * Math.sin(a), 0); c.rotation.z = a - Math.PI / 2; root.add(c); return c; });
+  return { ins(v) { const k = 1 - v; gw.position.set(Math.cos(mid) * k * 2.4, Math.sin(mid) * k * 2.4, k * 1.6); cuts.forEach(c => c.scale.setScalar(Math.max(k, .001))); gm.emissive.setHex(v > .97 ? 0x4a2200 : 0); } };
+}, 8);
+$("#ins").addEventListener("input", e => { const v = e.target.value / 100; PS.st.ins(v); $("#is").textContent = v > .97 ? D.s4.done : ""; });
+PS.st.ins(0);
+
+function resize() {
+  R.setSize(innerWidth, innerHeight, false); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix();
+  halfH = Math.tan(20 * Math.PI / 180) * 24; halfW = halfH * cam.aspect; PL.size(); BA.size(); PS.size();
+}
+addEventListener("resize", resize); resize();
+
+/* ===================== НАВИГАЦИЯ ===================== */
+let idx = -1, busy = false; const FULL = RM ? 1 : 1000;
+function show(n, instant) {
+  if (n < 0 || n >= N_SL || n === idx || (busy && !instant)) return;
+  busy = true; idx = n;
+  slides.forEach((s, i) => { const on = i === n; s.classList.toggle("on", on); s.setAttribute("aria-hidden", !on); s.inert = !on; });
+  aim(tgt(n), instant ? 1 : FULL);
+  $("#ct").textContent = `${n + 1} / ${N_SL}`; $("#pr i").style.width = ((n + 1) / N_SL * 100) + "%"; $("#pr").setAttribute("aria-valuenow", n + 1);
+  $("#pv").disabled = n === 0; $("#nx").disabled = n === N_SL - 1;
+  try { history.replaceState(null, "", "#slide-" + (n + 1)); } catch (e) {}
+  gsReset(); bReset(); playing = false; PL.size(); BA.size(); PS.size();
+  setTimeout(() => busy = false, instant ? 0 : (RM ? 350 : 1050));   // блокировка повторного переключения на время перехода
+}
+const tgt = n => { const t = { ...P[n] }; if (innerWidth < innerHeight && n >= 3) t.s = .001; return t; };   // на телефоне в портрете эмблему убираем, чтобы не мешала тексту
+const go = n => show(n), next = () => show(idx + 1), prev = () => show(idx - 1);
+$("#nx").onclick = next; $("#pv").onclick = prev;
+document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(+b.dataset.go - 1); });
+const toc = $("#toc");
+$("#toc ol").innerHTML = D.titles.map((t, i) => `<li><button class="b" data-t="${i}">${i + 1}. ${t}</button></li>`).join("");
+const tocToggle = f => { toc.hidden = f === undefined ? !toc.hidden : !f; if (!toc.hidden) $("#toc .b").focus(); };
+$("#tb").onclick = () => tocToggle(); toc.addEventListener("click", e => { const b = e.target.closest("[data-t]"); if (b) { tocToggle(false); go(+b.dataset.t); } else if (e.target === toc) tocToggle(false); });
+const fsToggle = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+$("#fs").onclick = fsToggle; if (!document.documentElement.requestFullscreen) $("#fs").hidden = true;   // iPhone не поддерживает полный экран
+addEventListener("keydown", e => {
+  const k = e.key;
+  if (k === "Escape") { tocToggle(false); return; }
+  if (e.target.matches("input,textarea")) return;
+  if (k === "m" || k === "M") tocToggle(); else if (k === "f" || k === "F") fsToggle();
+  else if (!toc.hidden) return;
+  else if (k === "ArrowRight" || k === "PageDown" || (k === " " && !e.target.closest("button,a"))) { e.preventDefault(); next(); }
+  else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); prev(); }
+  else if (k === "Home") go(0); else if (k === "End") go(N_SL - 1);
+});
+let lastWheel = 0;
+addEventListener("wheel", e => {
+  const now = performance.now(), s = slides[idx];
+  if (now - lastWheel < 1200 || Math.abs(e.deltaY) < 30 || !toc.hidden) return;
+  const can = e.deltaY > 0 ? s.scrollTop + s.clientHeight < s.scrollHeight - 2 : s.scrollTop > 2;   // если слайд можно прокрутить — не листаем
+  if (can) return; lastWheel = now; e.deltaY > 0 ? next() : prev();
+}, { passive: true });
+let sx = 0, sy = 0, sOk = false;
+addEventListener("touchstart", e => { sOk = !e.target.closest(".vw,input"); sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+addEventListener("touchend", e => { if (!sOk) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) dx < 0 ? next() : prev(); }, { passive: true });
+
+/* ===================== ИНТЕРАКТИВ ===================== */
+// Слайд 3: шаги создания ГМО (спираль → вырезание гена → кольцо-плазмида → клетка)
+const STEPS = [{ hl: 1 }, { hl: 1, lift: 1 }, { hl: 1, lift: 0, m: 1, vec: 1 }, { hl: 1, lift: 0, m: 1, vec: 1, fx: .82, s: .6 }];
+let gi = 0;
+function gsReset() { gi = 0; const c = $("#gc"); if (c) { c.hidden = true; $("#gs").textContent = D.ui.step; } }
+$("#gs").onclick = () => { const c = $("#gc"); c.hidden = false; c.textContent = `${gi + 1}/4. ${D.s3.steps[gi]}`; aim({ ...P[2], ...STEPS[gi] }, FULL); gi = (gi + 1) % 4; $("#gs").textContent = gi ? D.ui.next : D.ui.again; };
+$("#gr").onclick = () => { gsReset(); aim(P[2], FULL); };
+// Слайд 10: тест
+(function quiz() {
+  const root = $("#qz"); let i = 0, score = 0, Q;
+  const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+  function start() { i = 0; score = 0; Q = shuffle(D.quiz.map(x => ({ ...x }))); draw(); }
+  function draw() {
+    if (i >= Q.length) { root.innerHTML = `<p class="cd"><strong>${D.qui.score} ${score} / ${Q.length}</strong></p><button class="b" id="qr">${D.ui.again}</button>`; $("#qr").onclick = start; return; }
+    const x = Q[i], opts = shuffle([{ t: x.a, ok: 1 }, ...x.w.map(t => ({ t, ok: 0 }))]);
+    root.innerHTML = `<p class="mut">${D.qui.of} ${i + 1}/${Q.length}</p><p><strong>${x.q}</strong></p>${opts.map((o, k) => `<button class="b opt" data-k="${k}">${o.t}</button>`).join("")}<p id="qe" aria-live="polite"></p><button class="b" id="qn" hidden>${D.ui.next}</button>`;
+    $$(".opt", root).forEach(b => b.onclick = () => {
+      const o = opts[+b.dataset.k]; if (o.ok) score++;
+      $$(".opt", root).forEach((c, k) => { c.disabled = true; if (opts[k].ok) c.classList.add("ok"); else if (c === b) c.classList.add("no"); });
+      $("#qe").textContent = (o.ok ? D.qui.correct : D.qui.wrong) + x.e; $("#qn").hidden = false; $("#qn").focus();
+    });
+    $("#qn").onclick = () => { i++; draw(); };
+  }
+  start();
+})();
+
+/* ===================== ЦИКЛ АНИМАЦИИ ===================== */
+function loop(now) {
+  requestAnimationFrame(loop);
+  const dtt = Math.min(.1, (now - (loop.l || now)) / 1000); loop.l = now;
+  if (playing) { setG(Math.min(1, pv + dtt / 9)); if (pv >= 1) playing = false; }   // рост за 9 секунд
+  const k = ease(Math.min(1, (now - t0) / dur)); keys.forEach(x => cur[x] = from[x] + (to[x] - from[x]) * k);
+  upd(cur, now / 1000); R.render(sc, cam);
+  if (idx === 5) PL.draw(now / 1000); else if (idx === 6) BA.draw(now / 1000); else if (idx === 3) PS.draw(now / 1000);
+}
+const m = /slide-(\d+)/.exec(location.hash), start0 = m ? Math.min(N_SL, Math.max(1, +m[1])) - 1 : 0;
+cur = { ...P[start0] }; show(start0, true); requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
